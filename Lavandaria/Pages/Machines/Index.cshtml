@@ -1,0 +1,30 @@
+@page
+@model Lavandaria.Pages.Machines.IndexModel
+@{
+    ViewData["Title"] = "Maquinas";
+}
+<h2>Maquinas</h2>
+<table class="table">
+    <thead><tr><th>Nome</th><th>Estado</th><th>Acao</th></tr></thead>
+    <tbody>
+    @foreach (var m in Model.Machines)
+    {
+        <tr>
+            <td>@m.Name</td>
+            <td>@m.Status</td>
+            <td>
+                @if (m.Status == "Disponivel")
+                {
+                    <a asp-page="/Reservations/Create" asp-route-machineId="@m.Id" class="btn btn-sm btn-primary">Reservar</a>
+                }
+                else if (m.Status == "AguardarRecolha" && m.ReservedByUserId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+                {
+                    <form method="post" asp-page-handler="Pickup" asp-route-id="@m.Id"><button class="btn btn-sm btn-success">Confirmar recolha</button></form>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+<a asp-page="/Queue/Index" class="btn btn-secondary">Fila de espera</a>
+<a asp-page="/Assistant/Index" class="btn btn-secondary">Assistente</a>

@@ -1,0 +1,12 @@
+@page
+@model Lavandaria.Pages.Queue.IndexModel
+@{ ViewData["Title"]="Fila"; }
+<h2>Fila de espera</h2>
+<p>Posicao atual: @Model.Position</p>
+<form method="post" asp-page-handler="Enqueue"><button class="btn btn-primary">Entrar na fila</button></form>
+<br/>
+<table class="table"><thead><tr><th>#</th><th>Utilizador</th><th>Entrada</th></tr></thead><tbody>
+@foreach (var (e,i) in Model.Entries.Select((e,i)=>(e,i)))
+{ <tr><td>@(i+1)</td><td>@e.UserId</td><td>@e.EnqueuedAt.ToLocalTime()</td></tr> }
+</tbody></table>
+<a asp-page="/Machines/Index" class="btn btn-secondary">Maquinas</a>

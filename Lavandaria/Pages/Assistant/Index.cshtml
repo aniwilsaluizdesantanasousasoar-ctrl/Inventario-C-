@@ -1,0 +1,16 @@
+@page
+@model Lavandaria.Pages.Assistant.IndexModel
+@{ ViewData["Title"]="Assistente"; }
+<h2>Assistente de recomendacao de lavagem</h2>
+<form method="post">
+    <div class="mb-3"><label>Tipo de roupa</label>
+        <select asp-for="ClothType" class="form-select"><option>Delicada</option><option>Normal</option><option>Pesada</option></select></div>
+    <div class="mb-3"><label>Quantidade de pecas</label><input asp-for="Pieces" type="number" class="form-control" /></div>
+    <div class="mb-3"><label>Nivel de sujidade</label>
+        <select asp-for="Dirt" class="form-select"><option>Baixo</option><option>Medio</option><option>Alto</option></select></div>
+    <button type="submit" class="btn btn-primary">Recomendar</button>
+</form>
+@if (Model.Recommendation != null)
+{
+    <div class="alert alert-info mt-3">Programa recomendado: <strong>@Model.Recommendation</strong></div>
+}

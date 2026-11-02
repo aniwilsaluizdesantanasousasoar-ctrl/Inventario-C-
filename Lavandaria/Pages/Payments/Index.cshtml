@@ -1,0 +1,14 @@
+@page
+@model Lavandaria.Pages.Payments.IndexModel
+@{ ViewData["Title"]="Pagamento"; }
+<h2>Simulacao de pagamento</h2>
+<form method="post">
+    <div class="mb-3"><label>Metodo</label>
+        <select asp-for="Method" class="form-select"><option>MB WAY</option><option>Cartao bancario</option></select></div>
+    <div class="mb-3"><label>Montante (EUR)</label><input asp-for="Amount" type="number" step="0.01" class="form-control" value="4.50" /></div>
+    <button type="submit" class="btn btn-primary">Pagar (simulado)</button>
+</form>
+@if (Model.Done)
+{
+    <div class="alert alert-success mt-3">Pagamento simulado concluido com sucesso.</div>
+}

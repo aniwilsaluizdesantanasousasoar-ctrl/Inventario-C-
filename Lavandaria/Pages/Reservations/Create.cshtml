@@ -1,0 +1,19 @@
+@page
+@model Lavandaria.Pages.Reservations.CreateModel
+@{
+    ViewData["Title"] = "Reservar";
+}
+<h2>Reservar Maquina @Model.Machine?.Name</h2>
+<form method="post">
+    <input type="hidden" asp-for="MachineId" />
+    <div class="mb-3">
+        <label>Programa</label>
+        <select asp-for="ProgramId" class="form-select">
+        @foreach (var p in Model.Programs)
+        {
+            <option value="@p.Id">@p.Name - @p.DurationMinutes min - @p.Price.ToString("C")</option>
+        }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Confirmar reserva</button>
+</form>
